@@ -1,0 +1,138 @@
+/* Contenitore principale */
+.wrap {
+    margin: 20px 20px 0 0;
+}
+
+/* Stile filtri */
+.cf7fm-filters {
+    margin: 15px 0;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Stile select */
+.cf7fm-select {
+    min-width: 200px;
+    max-width: 300px;
+}
+
+/* Stile campo ricerca */
+.cf7fm-search {
+    min-width: 200px;
+    max-width: 300px;
+}
+
+/* Stile bottoni */
+.cf7fm-filters .button {
+    margin: 0;
+    height: 30px;
+    line-height: 28px;
+}
+
+/* Tabella */
+.wp-list-table {
+    margin-top: 20px;
+}
+
+/* Celle tabella */
+.wp-list-table th,
+.wp-list-table td {
+    padding: 8px 10px;
+}
+
+/* Azioni file */
+.cf7fm-file-actions {
+    display: flex;
+    gap: 5px;
+    flex-wrap: nowrap;
+}
+
+.cf7fm-file-actions .button {
+    padding: 0 8px;
+}
+
+/* Paginazione */
+.tablenav-pages {
+    float: right;
+    margin: 15px 0;
+}
+
+/* Responsive */
+@media screen and (max-width: 782px) {
+    .cf7fm-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cf7fm-select,
+    .cf7fm-search {
+        width: 100%;
+        max-width: none;
+    }
+
+    .cf7fm-filters .button {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .cf7fm-file-actions {
+        flex-direction: column;
+    }
+
+    .cf7fm-file-actions .button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+/* Fix per tablenav */
+.tablenav.top {
+    clear: both;
+    margin: 16px 0;
+    height: auto;
+    min-height: 30px;
+}
+
+/* Fix per paginazione */
+.tablenav-pages {
+    margin-top: 5px;
+}
+
+/* Fix per elementi flottanti */
+.clear {
+    clear: both;
+}
+
+
+.cf7fm-attachments {
+    margin: 10px 0;
+}
+
+.cf7fm-attachment {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+    padding: 5px;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 3px;
+}
+
+.cf7fm-attachment .dashicons {
+    color: #666;
+}
+
+.cf7fm-attachment a {
+    text-decoration: none;
+}
+
+.cf7fm-attachment .button {
+    margin-left: auto;
+}
