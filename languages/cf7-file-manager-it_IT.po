@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CF7 File Manager 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cf7-file-manager\n"
+"POT-Creation-Date: 2024-01-17 12:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-01-17 12:00:00+00:00\n"
+"Last-Translator: PaperPlane Factory <info@paperplanefactory.com>\n"
+"Language-Team: Italiano\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "CF7 File Manager richiede Contact Form 7. %sInstalla Contact Form 7%s"
+msgstr "CF7 File Manager richiede Contact Form 7. %sInstalla Contact Form 7%s"
+
+msgid "CF7 File Manager"
+msgstr "CF7 File Manager"
+
+msgid "CF7 Files"
+msgstr "CF7 Files"
+
+msgid "Sei sicuro di voler eliminare questo file?"
+msgstr "Sei sicuro di voler eliminare questo file?"
+
+msgid "File eliminato con successo"
+msgstr "File eliminato con successo"
+
+msgid "Errore durante l'eliminazione del file"
+msgstr "Errore durante l'eliminazione del file"
+
+msgid "Nessun file trovato."
+msgstr "Nessun file trovato."
+
+msgid "Tutti i form"
+msgstr "Tutti i form"
+
+msgid "Cerca file..."
+msgstr "Cerca file..."
+
+msgid "Filtra"
+msgstr "Filtra"
+
+msgid "Resetta filtri"
+msgstr "Resetta filtri"
+
+msgid "Nome File"
+msgstr "Nome File"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Tipo"
+msgstr "Tipo"
+
+msgid "Dimensione"
+msgstr "Dimensione"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Azioni"
+msgstr "Azioni"
+
+msgid "Nessun file trovato con i filtri selezionati."
+msgstr "Nessun file trovato con i filtri selezionati."
+
+msgid "Permessi insufficienti"
+msgstr "Permessi insufficienti"
+
+msgid "ID file non valido"
+msgstr "ID file non valido"
+
+msgid "File non trovato"
+msgstr "File non trovato"
+
+msgid "File non valido"
+msgstr "File non valido"
+
+msgid "Tipo file non supportato"
+msgstr "Tipo file non supportato"
+
+msgid "Errore creazione directory"
+msgstr "Errore creazione directory"
+
+msgid "Errore durante il caricamento del file"
+msgstr "Errore durante il caricamento del file"
+
+msgid "File Allegati"
+msgstr "File Allegati"
+
+msgid "Nessun file allegato a questo messaggio."
+msgstr "Nessun file allegato a questo messaggio."
+
+msgid "File"
+msgstr "File"
+
+msgid "Visualizza"
+msgstr "Visualizza"
+
+msgid "Scarica"
+msgstr "Scarica"

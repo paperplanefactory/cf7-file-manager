@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CF7 File Manager 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cf7-file-manager\n"
+"POT-Creation-Date: 2024-01-17 12:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: cf7-file-manager.php:94
+msgid "CF7 File Manager richiede Contact Form 7. %sInstalla Contact Form 7%s"
+msgstr ""
+
+#: cf7-file-manager.php:186
+msgid "CF7 File Manager"
+msgstr ""
+
+#: cf7-file-manager.php:187
+msgid "CF7 Files"
+msgstr ""
+
+#: cf7-file-manager.php:214
+msgid "Sei sicuro di voler eliminare questo file?"
+msgstr ""
+
+#: cf7-file-manager.php:215
+msgid "File eliminato con successo"
+msgstr ""
+
+#: cf7-file-manager.php:216
+msgid "Errore durante l'eliminazione del file"
+msgstr ""
+
+#: cf7-file-manager.php:217
+msgid "Nessun file trovato."
+msgstr ""
+
+#: admin/views/main-page.php:41
+msgid "Tutti i form"
+msgstr ""
+
+#: admin/views/main-page.php:56
+msgid "Cerca file..."
+msgstr ""
+
+#: admin/views/main-page.php:60
+msgid "Filtra"
+msgstr ""
+
+#: admin/views/main-page.php:65
+msgid "Resetta filtri"
+msgstr ""
+
+#: admin/views/main-page.php:77
+msgid "Nome File"
+msgstr ""
+
+#: admin/views/main-page.php:78
+msgid "Form"
+msgstr ""
+
+#: admin/views/main-page.php:79
+msgid "Tipo"
+msgstr ""
+
+#: admin/views/main-page.php:80
+msgid "Dimensione"
+msgstr ""
+
+#: admin/views/ma

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Template principale dell'interfaccia amministrativa
+ * 
+ * @package CF7FileManager
+ * @since 1.0.0
+ */
+
+// Previeni accesso diretto
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -7,9 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 $forms = WPCF7_ContactForm::find();
 
 // Ottieni i parametri di filtro
-$current_form = isset( $_GET['form_id'] ) ? intval( $_GET['form_id'] ) : 0;
-$search_term = isset( $_GET['search'] ) ? sanitize_text_field( $_GET['search'] ) : '';
-$page = isset( $_GET['paged'] ) ? max( 1, intval( $_GET['paged'] ) ) : 1;
+$current_form = filter_input( INPUT_GET, 'form_id', FILTER_VALIDATE_INT ) ?: 0;
+$search_term = filter_input( INPUT_GET, 'search', FILTER_SANITIZE_STRING ) ?: '';
+$page = filter_input( INPUT_GET, 'paged', FILTER_VALIDATE_INT ) ?: 1;
 
 // Prepara i filtri
 $filters = array(
@@ -22,14 +30,20 @@ $result = $this->uploads_manager->get_files( $page, $filters );
 $files = $result['files'];
 ?>
 
-<div class="wrap">
-	<h1><?php _e( 'CF7 File Manager', 'cf7-file-manager' ); ?></h1>
+<div class="wrap cf7fm-wrap">
+	<div class="cf7fm-header">
+		<h1><?php _e( 'CF7 File Manager', 'cf7-file-manager' ); ?></h1>
+	</div>
 
-	<!-- Form di ricerca e filtri -->
+	<?php settings_errors(); ?>
+
+	<!-- Filtri -->
 	<div class="cf7fm-filters-container">
 		<form method="get" class="cf7fm-filters">
+			<?php wp_nonce_field( 'cf7fm_filter_files', 'cf7fm_filter_nonce' ); ?>
 			<input type="hidden" name="page" value="cf7-file-manager">
 
+			<!-- Select Form -->
 			<select name="form_id" class="cf7fm-select">
 				<option value=""><?php _e( 'Tutti i form', 'cf7-file-manager' ); ?></option>
 				<?php foreach ( $forms as $form ) : ?>
@@ -39,10 +53,12 @@ $files = $result['files'];
 				<?php endforeach; ?>
 			</select>
 
-			<input type="search" name="search" value="<?php echo esc_attr( $search_term ); ?>"
-				placeholder="<?php esc_attr_e( 'Cerca file...', 'cf7-file-manager' ); ?>" class="cf7fm-search">
+			<!-- Campo Ricerca -->
+			<input type="search" name="search" class="cf7fm-search" value="<?php echo esc_attr( $search_term ); ?>"
+				placeholder="<?php esc_attr_e( 'Cerca file...', 'cf7-file-manager' ); ?>">
 
-			<input type="submit" class="button" value="<?php esc_attr_e( 'Filtra', 'cf7-file-manager' ); ?>">
+			<!-- Bottoni -->
+			<?php submit_button( __( 'Filtra', 'cf7-file-manager' ), 'secondary', 'submit', false ); ?>
 
 			<?php if ( $current_form || $search_term ) : ?>
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=cf7-file-manager' ) ); ?>" class="button">
@@ -52,26 +68,38 @@ $files = $result['files'];
 		</form>
 	</div>
 
-	<div class="clear"></div>
-
-	<!-- Resto del codice della tabella... -->
-
-	<!-- Tabella dei file -->
+	<!-- Tabella -->
 	<table class="wp-list-table widefat fixed striped">
 		<thead>
 			<tr>
-				<th><?php _e( 'Nome File', 'cf7-file-manager' ); ?></th>
-				<th><?php _e( 'Form', 'cf7-file-manager' ); ?></th>
-				<th><?php _e( 'Tipo', 'cf7-file-manager' ); ?></th>
-				<th><?php _e( 'Dimensione', 'cf7-file-manager' ); ?></th>
-				<th><?php _e( 'Data', 'cf7-file-manager' ); ?></th>
-				<th><?php _e( 'Azioni', 'cf7-file-manager' ); ?></th>
+				<th scope="col" class="check-column">
+					<input type="checkbox" id="cb-select-all">
+				</th>
+				<th scope="col" class="column-filename">
+					<?php _e( 'Nome File', 'cf7-file-manager' ); ?>
+				</th>
+				<th scope="col" class="column-form">
+					<?php _e( 'Form', 'cf7-file-manager' ); ?>
+				</th>
+				<th scope="col" class="column-type">
+					<?php _e( 'Tipo', 'cf7-file-manager' ); ?>
+				</th>
+				<th scope="col" class="column-size">
+					<?php _e( 'Dimensione', 'cf7-file-manager' ); ?>
+				</th>
+				<th scope="col" class="column-date">
+					<?php _e( 'Data', 'cf7-file-manager' ); ?>
+				</th>
+				<th scope="col" class="column-actions">
+					<?php _e( 'Azioni', 'cf7-file-manager' ); ?>
+				</th>
 			</tr>
 		</thead>
+
 		<tbody>
 			<?php if ( empty( $files ) ) : ?>
 				<tr>
-					<td colspan="6">
+					<td colspan="6" class="cf7fm-empty-state">
 						<?php
 						if ( $current_form || $search_term ) {
 							_e( 'Nessun file trovato con i filtri selezionati.', 'cf7-file-manager' );
@@ -84,28 +112,57 @@ $files = $result['files'];
 			<?php else : ?>
 				<?php foreach ( $files as $file ) : ?>
 					<tr>
-						<td><?php echo esc_html( $file['original_name'] ); ?></td>
-						<td><?php
-						$form = wpcf7_contact_form( $file['form_id'] );
-						echo $form ? esc_html( $form->title() ) : esc_html( sprintf( __( 'Form #%d', 'cf7-file-manager' ), $file['form_id'] ) );
-						?></td>
-						<td><?php echo esc_html( strtoupper( $file['file_type'] ) ); ?></td>
-						<td><?php echo esc_html( $file['size_formatted'] ); ?></td>
-						<td><?php echo esc_html( $file['upload_date_formatted'] ); ?></td>
-						<td>
-							<a href="<?php echo esc_url( $this->uploads_manager->get_file_url( $file['id'] ) ); ?>"
-								target="_blank" class="button button-small">
-								<?php _e( 'Visualizza', 'cf7-file-manager' ); ?>
-							</a>
-							<a href="<?php echo esc_url( $this->uploads_manager->get_file_url( $file['id'], true ) ); ?>"
-								class="button button-small">
-								<?php _e( 'Scarica', 'cf7-file-manager' ); ?>
-							</a>
-							<button class="button button-small delete-file"
-								data-file-id="<?php echo esc_attr( $file['id'] ); ?>"
-								data-filename="<?php echo esc_attr( $file['file_name'] ); ?>">
-								<?php _e( 'Elimina', 'cf7-file-manager' ); ?>
-							</button>
+						<th scope="row" class="check-column">
+							<input type="checkbox" name="file_ids[]" value="<?php echo esc_attr( $file['id'] ); ?>"
+								class="file-checkbox">
+						</th>
+						<td class="column-filename">
+							<?php echo esc_html( $file['original_name'] ); ?>
+						</td>
+						<td class="column-form" data-title="<?php esc_attr_e( 'Form:', 'cf7-file-manager' ); ?>">
+							<?php
+							$form = wpcf7_contact_form( $file['form_id'] );
+							echo $form ? esc_html( $form->title() ) :
+								esc_html( sprintf( __( 'Form #%d', 'cf7-file-manager' ),
+									$file['form_id'] ) );
+							?>
+						</td>
+						<td class="column-type" data-title="<?php esc_attr_e( 'Tipo:', 'cf7-file-manager' ); ?>">
+							<?php echo esc_html( strtoupper( $file['file_type'] ) ); ?>
+						</td>
+						<td class="column-size" data-title="<?php esc_attr_e( 'Dimensione:', 'cf7-file-manager' ); ?>">
+							<?php echo esc_html( $file['size_formatted'] ); ?>
+						</td>
+						<td class="column-date" data-title="<?php esc_attr_e( 'Data:', 'cf7-file-manager' ); ?>">
+							<span title="<?php echo esc_attr(
+								wp_date(
+									'Y-m-d H:i:s',  // Formato completo per il tooltip
+									strtotime( $file['uploaded_at'] . ' UTC' )
+								)
+							); ?>">
+								<?php echo esc_html( $file['upload_date_formatted'] ); ?>
+							</span>
+						</td>
+						<td class="column-actions">
+							<div class="cf7fm-file-actions">
+								<a href="<?php echo esc_url( $this->uploads_manager->get_file_url( $file['id'] ) ); ?>"
+									target="_blank" class="button button-small"
+									title="<?php esc_attr_e( 'Visualizza', 'cf7-file-manager' ); ?>">
+									<span class="dashicons dashicons-visibility"></span>
+								</a>
+
+								<a href="<?php echo esc_url( $this->uploads_manager->get_file_url( $file['id'], true ) ); ?>"
+									class="button button-small" title="<?php esc_attr_e( 'Scarica', 'cf7-file-manager' ); ?>">
+									<span class="dashicons dashicons-download"></span>
+								</a>
+
+								<button type="button" class="button button-small delete-file"
+									data-file-id="<?php echo esc_attr( $file['id'] ); ?>"
+									data-filename="<?php echo esc_attr( $file['file_name'] ); ?>"
+									title="<?php esc_attr_e( 'Elimina', 'cf7-file-manager' ); ?>">
+									<span class="dashicons dashicons-trash"></span>
+								</button>
+							</div>
 						</td>
 					</tr>
 				<?php endforeach; ?>
@@ -113,9 +170,16 @@ $files = $result['files'];
 		</tbody>
 	</table>
 
-	<?php if ( $result['pages'] > 1 ) : ?>
-		<div class="tablenav bottom">
-			<div class="tablenav-pages">
+
+	<!-- Aggiungi il bottone per eliminare i file selezionati -->
+	<div class="tablenav bottom">
+		<div class="alignleft actions bulkactions">
+			<button type="button" id="delete-selected" class="button action" disabled>
+				<?php _e( 'Elimina selezionati', 'cf7-file-manager' ); ?>
+			</button>
+		</div>
+		<?php if ( $result['pages'] > 1 ) : ?>
+			<div class="cf7fm-pagination">
 				<?php
 				echo paginate_links( array(
 					'base' => add_query_arg( 'paged', '%#%' ),
@@ -131,6 +195,8 @@ $files = $result['files'];
 				) );
 				?>
 			</div>
-		</div>
-	<?php endif; ?>
+		<?php endif; ?>
+	</div>
+
+
 </div>
