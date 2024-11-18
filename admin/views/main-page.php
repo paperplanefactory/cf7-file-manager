@@ -148,19 +148,19 @@ $files = $result['files'];
 								<a href="<?php echo esc_url( $this->uploads_manager->get_file_url( $file['id'] ) ); ?>"
 									target="_blank" class="button button-small"
 									title="<?php esc_attr_e( 'Visualizza', 'cf7-file-manager' ); ?>">
-									<span class="dashicons dashicons-visibility"></span>
+									<?php esc_attr_e( 'Visualizza', 'cf7-file-manager' ); ?>
 								</a>
 
 								<a href="<?php echo esc_url( $this->uploads_manager->get_file_url( $file['id'], true ) ); ?>"
 									class="button button-small" title="<?php esc_attr_e( 'Scarica', 'cf7-file-manager' ); ?>">
-									<span class="dashicons dashicons-download"></span>
+									<?php esc_attr_e( 'Scarica', 'cf7-file-manager' ); ?>
 								</a>
 
 								<button type="button" class="button button-small delete-file"
 									data-file-id="<?php echo esc_attr( $file['id'] ); ?>"
 									data-filename="<?php echo esc_attr( $file['file_name'] ); ?>"
 									title="<?php esc_attr_e( 'Elimina', 'cf7-file-manager' ); ?>">
-									<span class="dashicons dashicons-trash"></span>
+									<?php esc_attr_e( 'Elimina', 'cf7-file-manager' ); ?>
 								</button>
 							</div>
 						</td>
