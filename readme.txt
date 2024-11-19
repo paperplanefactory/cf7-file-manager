@@ -21,7 +21,7 @@ Caratteristiche principali:
 * Integrazione con Contact Form 7
 * Supporto multi-file
 * Protezione accesso ai file
-
+* Integrazione con Flamingo
 == Installation ==
 
 1. Carica la cartella 'cf7-file-manager' nella directory '/wp-content/plugins/'
@@ -39,6 +39,9 @@ Il plugin implementa automaticamente misure di sicurezza per proteggere i file c
 
 = È compatibile con l'ultimo WordPress? =
 Sì, il plugin viene regolarmente testato con le ultime versioni di WordPress e Contact Form 7.
+
+= Come si integra con Flamingo? =
+Il plugin aggiunge una riga nel box Meta di Flamingo con l'elenco dei file allegati e il relativo link.
 
 == Screenshots ==
 

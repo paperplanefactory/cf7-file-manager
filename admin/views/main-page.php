@@ -140,7 +140,7 @@ $files = $result['files'];
 									strtotime( $file['uploaded_at'] . ' UTC' )
 								)
 							); ?>">
-								<?php echo esc_html( $file['upload_date_formatted'] ); ?>
+								<?php echo esc_html( $file['uploaded_at'] ); ?>
 							</span>
 						</td>
 						<td class="column-actions">
