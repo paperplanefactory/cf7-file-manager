@@ -8,6 +8,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Gestisce e salva i file caricati tramite Contact Form 7, fornendo un'interfaccia amministrativa per la gestione dei file.
+Questo plugin è stato sviluppato utilizzando Claude.ai
 
 == Description ==
 
